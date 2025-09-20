@@ -12,36 +12,33 @@
 #include <fstream>
 using namespace std;
 
-// Set the array size as a constant
-const int SIZE = 30;
-
-// displayAll() displays all array elements
+// displayAll() displays all vector elements
 // arguments: vector
 // return: nothing
 void displayAll(const vector<double>&);
 
-// displaySelect() displays selected array element
+// displaySelect() displays selected vector element
 // arguments: vector
 // return: nothing
 void displaySelect(const vector<double>&);
 
-// sortArray() sortsArray reverse and normal
+// sortVec() sortsVec reverse and normal
 // arguments: vector
 // return: nothing
-void sortArray(vector<double>&);
+void sortVec(vector<double>&);
 
-// searchElement() searches for selected element in array
+// searchElement() searches for selected element in vector
 // arguments: vector
 // return: nothing
 void searchElement(vector<double>&);
 
-// minMax() finds min and max and sum values in the array, and average now
+// minMax() finds min and max and sum values in the vector, and average now
 // arguments: vector
 // return: nothing
 void minMaxSumAvg(vector<double>&);
 
 int main() {
-    // Create your array of set elements
+    // Create your vector of set elements
     vector<double> yields{};
 
     // Open file and check if it opened
@@ -51,7 +48,7 @@ int main() {
         return 1;
     }
 
-    // Read the file and fill the array, keep reading untill end of the fgile
+    // Read the file and fill the vector, keep reading untill end of the fgile
     double val;
     while (file >> val){
         yields.push_back(val);
@@ -61,19 +58,13 @@ int main() {
     displayAll(yields);
     displaySelect(yields);
     searchElement(yields);
-    sortArray(yields);
+    sortVec(yields);
     minMaxSumAvg(yields);
     
 
-    /* Testing if the file read correct
-    for (int i = 0; i < SIZE; i++) {
-        cout << yields[i] << " ";
-    }
-    */
-
 }
 
-// Function uses for loop to display every element of the array
+// Function uses for loop to display every element of the vector
 void displayAll(const vector<double>& arr){
     cout << "All Yields: ";
     for (double i : arr) {
@@ -82,7 +73,7 @@ void displayAll(const vector<double>& arr){
     cout << endl << endl;
 }
 
-void displaySelect(const array<double, SIZE>& arr){
+void displaySelect(const vector<double>& arr){
     // Create variable for element number
     int num;
     cout << "Select yield # (enter -1 if you would not like to select another yield): ";
@@ -97,8 +88,8 @@ void displaySelect(const array<double, SIZE>& arr){
     cout << endl;
 }
 
-void sortArray(array<double, SIZE>& arr){
-    // SOrt the array and display using for loop
+void sortVec(vector<double>& arr){
+    // SOrt the vector and display using for loop
     sort(arr.begin(), arr.end());
     cout << "Lowest to Highest Yields: ";
     for (double i : arr) {
@@ -106,7 +97,7 @@ void sortArray(array<double, SIZE>& arr){
     }
     cout << endl << endl;
 
-    // Sort the array in reverse and display in similar fashion
+    // Sort the vector in reverse and display in similar fashion
     sort(arr.rbegin(), arr.rend());
     cout << "Highest to Lowest Yields: ";
     for (double i : arr) {
@@ -115,14 +106,14 @@ void sortArray(array<double, SIZE>& arr){
     cout << endl << endl;
 }
 
-void searchElement(array<double, SIZE>& arr){
+void searchElement(vector<double>& arr){
     // Create a variable for the target element
     double num;
     cout << "Enter a yield to search for: ";
     cin >> num;
 
     // Iterator to point to the element
-    array<double, SIZE>::iterator it;
+    vector<double>::iterator it;
 
     // Search for the element
     it = find(arr.begin(), arr.end(), num);
@@ -135,7 +126,7 @@ void searchElement(array<double, SIZE>& arr){
     }
 }
 
-void minMaxSumAvg(array<double, SIZE>& arr){
+void minMaxSumAvg(vector<double>& arr){
     // Use min max and accumulate functions to find the highest lowest and total yields, average also isnt too hard to add so 
     // CReate sum variable to use for average later
     double sum = accumulate(arr.begin(), arr.end(), 0.0);
@@ -143,5 +134,5 @@ void minMaxSumAvg(array<double, SIZE>& arr){
     cout << "Max yield: " << *max_element(arr.begin(), arr.end()) <<endl;
     cout << "Min yield: " << *min_element(arr.begin(), arr.end()) <<endl;
     cout << "Total yield: " << sum << endl;
-    cout << "Average yield: " << sum / SIZE << endl << endl;
+    cout << "Average yield: " << sum / arr.size() << endl << endl;
 }
